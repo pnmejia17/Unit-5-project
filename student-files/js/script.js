@@ -63,10 +63,10 @@ const displayUserModal = (user) => {
     body.insertAdjacentHTML("beforeend", modalHTML); 
   }
 
-body.addEventListener('click', (e) => {
-    const closeButton = e.target.closest('.modal-btn-close')
-    const modalContainer = document.querySelector('.modal-container')
-    if (closeButton){
-      modalContainer.remove()
-}})
-
+body.addEventListener("click", (e) => {
+    const modal = document.querySelector(".modal-container");
+    const clickedButton = e.target.classList.contains('modal-close-btn')
+    if (clickedButton) {
+      modal.remove();
+    }
+  });
