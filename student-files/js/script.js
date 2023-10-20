@@ -7,8 +7,13 @@ let users = []
 
 // FETCH FUNCTIONS
 
+// async function uses query to get elements from API
+// capped at 12 results each time
+// stores results in array users
+// calls helper func generateUsers to display users 
+
 async function fetchData(url){
-    const response = await fetch('https://randomuser.me/api/?results=12')
+    const response = await fetch(ranUserUrl)
     const data = await response.json()
     users = data.results
     generateUsers(data.results)
@@ -17,6 +22,9 @@ async function fetchData(url){
 fetchData()
 
 // HELPER FUNCTIONS
+
+// inserts HTML while mapping the
+// variables of each individual as the content
 
 function generateUsers(users){
     const html = users.map(user => `
@@ -35,6 +43,11 @@ function generateUsers(users){
 }
 
 // EVENT LISTENER 
+
+// listens for the button click and 
+// searches user array for the name
+// of the individual clickled to display
+// their info in the modal
 
 gallery.addEventListener('click', (e) => {
   const userModal = e.target.closest('.card')
@@ -62,6 +75,8 @@ const displayUserModal = (user) => {
     </div>`;
     body.insertAdjacentHTML("beforeend", modalHTML); 
   }
+
+// listens for click of x to close modal
 
 body.addEventListener("click", (e) => {
     const modal = document.querySelector(".modal-container");
