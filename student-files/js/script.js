@@ -58,6 +58,7 @@ gallery.addEventListener('click', (e) => {
 }
 })
 const displayUserModal = (user) => {
+    const dob = new Date(user.dob.date)
     const modalHTML = `            
     <div class="modal-container">
     <div class="modal">
@@ -70,7 +71,7 @@ const displayUserModal = (user) => {
             <hr>
             <p class="modal-text">${user.cell}</p>
             <p class="modal-text">${user.location.street.number} ${user.location.street.name}, ${user.location.city}, ${user.location.state} ${user.location.postcode}</p>
-            <p class="modal-text">Birthday: ${user.dob.date} </p>
+            <p class="modal-text">Birthday: ${dob.getMonth()+1}/${dob.getDate()}/${dob.getFullYear()} </p>
         </div>
     </div>`;
     body.insertAdjacentHTML("beforeend", modalHTML); 
@@ -80,7 +81,7 @@ const displayUserModal = (user) => {
 
 body.addEventListener("click", (e) => {
     const modal = document.querySelector(".modal-container");
-    const clickedButton = e.target.classList.contains('modal-close-btn')
+    const clickedButton = e.target.closest('.modal-close-btn')
     if (clickedButton) {
       modal.remove();
     }
